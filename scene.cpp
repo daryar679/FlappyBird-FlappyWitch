@@ -31,16 +31,16 @@ void Scene::setUpPillarTimer()
 {
     pillarTimer = new QTimer(this);
     connect(pillarTimer,&QTimer::timeout,[=](){
-       PillarItem * pillarItem = new PillarItem();
+       Pillar * pillar = new Pillar();
 
-       connect(pillarItem,&PillarItem::collideFail,[=](){
+       connect(pillar,&Pillar::collideFail,[=](){
           pillarTimer -> stop();
           freezeBirdAndPillarsInPlace();
           setGameOn(false);
           showGameOverGraphics();
        });
 
-       addItem(pillarItem);
+       addItem(pillar);
     });
 }
 
