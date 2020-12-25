@@ -36,7 +36,7 @@ private:
     void setUpPillarTimer();
     void freezeBirdAndPillarsInPlace();
     QTimer * pillarTimer;
-    BirdItem * bird;
+    Bird * bird;
     bool gameOn;
     int score;
     int bestScore;
