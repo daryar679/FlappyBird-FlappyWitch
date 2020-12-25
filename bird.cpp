@@ -1,7 +1,7 @@
-#include "birditem.h"
+#include "bird.h"
 #include <QGraphicsScene>
 
-BirdItem::BirdItem(QPixmap pixmap)
+Bird::Bird(QPixmap pixmap)
 {
     setPixmap(pixmap);
 
@@ -17,17 +17,17 @@ BirdItem::BirdItem(QPixmap pixmap)
 
 }
 
-qreal BirdItem::rotation() const
+qreal Bird::rotation() const
 {
     return m_rotation;
 }
 
-qreal BirdItem::y() const
+qreal Bird::y() const
 {
     return m_y;
 }
 
-void BirdItem::shootUp()
+void Bird::shootUp()
 {
     yAnimation -> stop();
     rotationAnimation -> stop();
@@ -46,20 +46,20 @@ void BirdItem::shootUp()
     rotateTo(-20,200,QEasingCurve::OutCubic);
 }
 
-void BirdItem::startFlying()
+void Bird::startFlying()
 {
     yAnimation -> start();
     rotateTo(90,1200,QEasingCurve::InQuad);
 
 }
 
-void BirdItem::freezeInPlace()
+void Bird::freezeInPlace()
 {
     yAnimation -> stop();
     rotationAnimation -> stop();
 }
 
-void BirdItem::setRotation(qreal rotation)
+void Bird::setRotation(qreal rotation)
 {
     m_rotation = rotation;
     QPointF c = boundingRect().center();
@@ -70,13 +70,13 @@ void BirdItem::setRotation(qreal rotation)
     setTransform(t);
 }
 
-void BirdItem::setY(qreal y)
+void Bird::setY(qreal y)
 {
     moveBy(0, y - m_y);
     m_y = y;
 }
 
-void BirdItem::rotateTo(const qreal &end, const int &duration, const QEasingCurve &curve)
+void Bird::rotateTo(const qreal &end, const int &duration, const QEasingCurve &curve)
 {
     rotationAnimation -> setStartValue(rotation());
     rotationAnimation -> setEndValue(end);
@@ -86,7 +86,7 @@ void BirdItem::rotateTo(const qreal &end, const int &duration, const QEasingCurv
     rotationAnimation -> start();
 }
 
-void BirdItem::fallToGroudIfNecessary()
+void Bird::fallToGroudIfNecessary()
 {
     if(y() < groundPosition)
     {
