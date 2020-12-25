@@ -33,4 +33,4 @@ private:
     bool pastBird;
 };
 
-#endif // PILLARITEM_H
+#endif // PILLAR_H
