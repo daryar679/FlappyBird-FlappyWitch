@@ -122,7 +122,7 @@ void Scene::cleanPillars()
     QList <QGraphicsItem*> sceneItems = items();
     foreach(QGraphicsItem* item, sceneItems)
     {
-        PillarItem *pillar = dynamic_cast<PillarItem*>(item);
+        Pillar *pillar = dynamic_cast<Pillar*>(item);
         if(pillar)
         {
             removeItem(pillar);
