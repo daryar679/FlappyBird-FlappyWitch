@@ -1,10 +1,10 @@
-#include "pillaritem.h"
+#include "pillar.h"
 #include <QRandomGenerator>
 #include <QGraphicsScene>
 #include "scene.h"
-#include "birditem.h"
+#include "bird.h"
 
-PillarItem::PillarItem():topPillar(new QGraphicsPixmapItem(QPixmap(":/Images/Pillar.png"))),bottomPillar(new QGraphicsPixmapItem(QPixmap(":/Images/Pillar.png"))),pastBird(false)
+Pillar::Pillar():topPillar(new QGraphicsPixmapItem(QPixmap(":/Images/Pillar.png"))),bottomPillar(new QGraphicsPixmapItem(QPixmap(":/Images/Pillar.png"))),pastBird(false)
 {
     topPillar->setPos(QPointF(0,0) - QPointF(topPillar->boundingRect().width()/2,topPillar->boundingRect().height() + 70));
     bottomPillar->setPos(QPointF(0,0) + QPointF(-bottomPillar->boundingRect().width()/2,70));
@@ -32,23 +32,23 @@ PillarItem::PillarItem():topPillar(new QGraphicsPixmapItem(QPixmap(":/Images/Pil
 
 }
 
-PillarItem::~PillarItem()
+Pillar::~Pillar()
 {
     delete topPillar;
     delete bottomPillar;
 }
 
-qreal PillarItem::x() const
+qreal Pillar::x() const
 {
     return m_x;
 }
 
-void PillarItem::freezeInPlace()
+void Pillar::freezeInPlace()
 {
     xAnimation -> stop();
 }
 
-void PillarItem::setx(qreal x)
+void Pillar::setx(qreal x)
 {
     m_x = x;
 
@@ -71,14 +71,14 @@ void PillarItem::setx(qreal x)
     setPos(QPointF(0,0) + QPointF(x,yPos));
 }
 
-bool PillarItem::collidesWithBird()
+bool Pillar::collidesWithBird()
 {
     QList<QGraphicsItem*> collidingItems = topPillar -> collidingItems();
     collidingItems.append(bottomPillar -> collidingItems());
     foreach(QGraphicsItem *item, collidingItems)
     {
-        BirdItem *birdItem = dynamic_cast<BirdItem*>(item);
-        if(birdItem)
+        Bird *bird = dynamic_cast<Bird*>(item);
+        if(bird)
         {
             return true;
         }
