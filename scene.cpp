@@ -10,7 +10,7 @@ Scene::Scene(QObject *parent) : QGraphicsScene(parent), gameOn(false),score(0),b
 
 void Scene::addBird()
 {
-    bird = new BirdItem(QPixmap(":/Images/Circle.png"));
+    bird = new Bird(QPixmap(":/Images/Circle.png"));
     addItem(bird);
 }
 
