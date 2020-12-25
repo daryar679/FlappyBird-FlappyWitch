@@ -1,17 +1,17 @@
-#ifndef BIRDITEM_H
-#define BIRDITEM_H
+#ifndef BIRD_H
+#define BIRD_H
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QPropertyAnimation>
 
-class BirdItem : public QObject, public QGraphicsPixmapItem
+class Bird : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
     Q_PROPERTY(qreal rotation READ rotation WRITE setRotation)
     Q_PROPERTY(qreal y READ y WRITE setY)
 public:
-    explicit BirdItem(QPixmap pixmap);
+    explicit Bird(QPixmap pixmap);
 
     qreal rotation() const;
 
@@ -42,4 +42,4 @@ private:
     qreal groundPosition;
 };
 
-#endif // BIRDITEM_H
+#endif // BIRD_H
