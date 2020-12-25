@@ -50,7 +50,7 @@ void Scene::freezeBirdAndPillarsInPlace()
     QList <QGraphicsItem*> sceneItems = items();
     foreach(QGraphicsItem* item, sceneItems)
     {
-        PillarItem *pillar = dynamic_cast<PillarItem*>(item);
+        Pillar *pillar = dynamic_cast<Pillar*>(item);
         if(pillar)
         {
             pillar -> freezeInPlace();
