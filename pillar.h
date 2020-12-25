@@ -1,17 +1,17 @@
-#ifndef PILLARITEM_H
-#define PILLARITEM_H
+#ifndef PILLAR_H
+#define PILLAR_H
 
 #include <QGraphicsItemGroup>
 #include <QGraphicsPixmapItem>
 #include <QPropertyAnimation>
 
-class PillarItem :public QObject, public QGraphicsItemGroup
+class Pillar :public QObject, public QGraphicsItemGroup
 {
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setx)
 public:
-    explicit PillarItem();
-    ~PillarItem();
+    explicit Pillar();
+    ~Pillar();
     qreal x() const;
     void freezeInPlace();
 
