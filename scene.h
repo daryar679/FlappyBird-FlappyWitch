@@ -3,8 +3,8 @@
 
 #include <QGraphicsScene>
 #include <QTimer>
-#include "pillaritem.h"
-#include "birditem.h"
+#include "pillar.h"
+#include "bird.h"
 
 class Scene : public QGraphicsScene
 {
