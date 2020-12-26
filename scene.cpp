@@ -16,14 +16,14 @@ void Scene::addBird()
 
 void Scene::startGame()
 {
-    bird -> startFlying();
+    bird -> startFlying();//начало движения "Птицы"
     if(!pillarTimer -> isActive())
     {
-        cleanPillars();
+        cleanPillars();//очищение сцены от столбов
         setGameOn(true);
         setScore(0);
-        hideGameOverGraphics();
-        pillarTimer -> start(1000);
+        hideGameOverGraphics();//очищение сцены от графики завершения игры
+        pillarTimer -> start(1000);//установка временного промежутка на таймере
     }
 }
 
@@ -31,29 +31,30 @@ void Scene::setUpPillarTimer()
 {
     pillarTimer = new QTimer(this);
     connect(pillarTimer,&QTimer::timeout,[=](){
-       Pillar * pillar = new Pillar();
+       Pillar * pillar = new Pillar();//добавление новых столбов,когда время на таймере заканчивается
 
+        //в случае столкновения "Птицы" и столбов игра прекращается
        connect(pillar,&Pillar::collideFail,[=](){
-          pillarTimer -> stop();
-          freezeBirdAndPillarsInPlace();
+          pillarTimer -> stop();//остановка таймера
+          freezeBirdAndPillarsInPlace();//замирание "Птицы" и столбов
           setGameOn(false);
-          showGameOverGraphics();
+          showGameOverGraphics();//появление графики окончания игры
        });
 
-       addItem(pillar);
+       addItem(pillar);//добавление столбов на сцену
     });
 }
 
 void Scene::freezeBirdAndPillarsInPlace()
 {
-    bird -> freezeInPlace();
-    QList <QGraphicsItem*> sceneItems = items();
+    bird -> freezeInPlace();//замирание "Птицы" на месте
+    QList <QGraphicsItem*> sceneItems = items();//лист со всеми участниками на сцене
     foreach(QGraphicsItem* item, sceneItems)
     {
         Pillar *pillar = dynamic_cast<Pillar*>(item);
         if(pillar)
         {
-            pillar -> freezeInPlace();
+            pillar -> freezeInPlace();//если это столб - столб замирает
         }
     }
 }
@@ -84,6 +85,7 @@ void Scene::incrementScore()
 
 void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    //если игра началась и пользователь нажал на левую кнопку мыши - "Птица" взлетает
     if(event -> button() == Qt::LeftButton)
     {
         if(gameOn)
