@@ -12,25 +12,25 @@ class Pillar :public QObject, public QGraphicsItemGroup
 public:
     explicit Pillar();
     ~Pillar();
-    qreal x() const;
-    void freezeInPlace();
+    qreal x() const;//геттер для  перемещения по х
+    void freezeInPlace();//замирание столбов на месте
 
 signals:
 
-    void collideFail();
+    void collideFail();//сигнал для окончания игры при столкновении "Птицы" и столба
 
 public slots:
 
-    void setx(qreal x);
+    void setx(qreal x);//сеттер для перемещения по х
 
 private:
-    bool collidesWithBird();
-    QGraphicsPixmapItem * topPillar;
-    QGraphicsPixmapItem * bottomPillar;
-    QPropertyAnimation * xAnimation;
+    bool collidesWithBird();//столкновение с "Птицей"(==true при столкновении)
+    QGraphicsPixmapItem * topPillar;//верхний столб
+    QGraphicsPixmapItem * bottomPillar;//нижний столб
+    QPropertyAnimation * xAnimation;//свойство перемещения столбов справа налево
     int yPos;
     qreal m_x;
-    bool pastBird;
+    bool pastBird;//флаг для отслеживания прохождения "Птицы" через столбы
 };
 
 #endif // PILLAR_H
