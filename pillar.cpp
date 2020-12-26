@@ -6,29 +6,32 @@
 
 Pillar::Pillar():topPillar(new QGraphicsPixmapItem(QPixmap(":/Images/Pillar.png"))),bottomPillar(new QGraphicsPixmapItem(QPixmap(":/Images/Pillar.png"))),pastBird(false)
 {
-    topPillar->setPos(QPointF(0,0) - QPointF(topPillar->boundingRect().width()/2,topPillar->boundingRect().height() + 70));
-    bottomPillar->setPos(QPointF(0,0) + QPointF(-bottomPillar->boundingRect().width()/2,70));
+    topPillar->setPos(QPointF(0,0) - QPointF(topPillar->boundingRect().width()/2,topPillar->boundingRect().height() + 70));//установка положения для верхнего столба
+    bottomPillar->setPos(QPointF(0,0) + QPointF(-bottomPillar->boundingRect().width()/2,70));//установка положения для нижнего столба
 
+    //объединяем верхний и нижний столбы для того,чтобы использовать их как одно целое
     addToGroup(topPillar);
     addToGroup(bottomPillar);
 
+    //создание случайной позиции для столбов
     yPos = QRandomGenerator::global()->bounded(150);
     int xRandomizer = QRandomGenerator::global()->bounded(200);
 
-    setPos(QPoint(0,0) + QPoint(260 + xRandomizer, yPos));
+    setPos(QPoint(0,0) + QPoint(260 + xRandomizer, yPos));//установка позиции
 
-    xAnimation = new QPropertyAnimation(this,"x",this);
-    xAnimation -> setStartValue(260 + xRandomizer);
-    xAnimation -> setEndValue(-300);
-    xAnimation -> setEasingCurve(QEasingCurve::Linear);
-    xAnimation -> setDuration(1500);
+    xAnimation = new QPropertyAnimation(this,"x",this);//конструктор для свойства перемещения
+    xAnimation -> setStartValue(260 + xRandomizer);//стартовое значение для появления столбов
+    xAnimation -> setEndValue(-300);//конечное значение для исчезновения столбов
+    xAnimation -> setEasingCurve(QEasingCurve::Linear);//установление управления анимацией(столбы двигаются по прямой линии)
+    xAnimation -> setDuration(1500);//установление продолжительности движения столбов
 
+    //удаление столбов, когда они уходят из зоны видимости
     connect(xAnimation,&QPropertyAnimation::finished,[=](){
         scene() -> removeItem(this);
         delete this;
     });
 
-    xAnimation -> start();
+    xAnimation -> start();//начало анимации
 
 }
 
@@ -45,6 +48,7 @@ qreal Pillar::x() const
 
 void Pillar::freezeInPlace()
 {
+    //прекращение анимации
     xAnimation -> stop();
 }
 
@@ -73,8 +77,8 @@ void Pillar::setx(qreal x)
 
 bool Pillar::collidesWithBird()
 {
-    QList<QGraphicsItem*> collidingItems = topPillar -> collidingItems();
-    collidingItems.append(bottomPillar -> collidingItems());
+    QList<QGraphicsItem*> collidingItems = topPillar -> collidingItems();//заполняем список объектами, с которыми может столкнуться "Птица"
+    collidingItems.append(bottomPillar -> collidingItems());//добавляем в список нижний столб
     foreach(QGraphicsItem *item, collidingItems)
     {
         Bird *bird = dynamic_cast<Bird*>(item);
