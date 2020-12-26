@@ -12,32 +12,32 @@ class Scene : public QGraphicsScene
 public:
     explicit Scene(QObject *parent = nullptr);
 
-    void addBird();
+    void addBird();//добавление "Птицы" на сцену
 
-    void startGame();
+    void startGame();//начало игры
 
-    bool getGameOn() const;
-    void setGameOn(bool value);
+    bool getGameOn() const;//геттер для определения статуса игры
+    void setGameOn(bool value);//сеттер для определения статуса игры
 
-    void incrementScore();
+    void incrementScore();//счет
 
-    void setScore(int value);
+    void setScore(int value);//сеттер для счета
 
 signals:
 public slots:
 
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event)override;//управление "Птицей" с помощью мыши
 
 private:
-    void showGameOverGraphics();
-    void hideGameOverGraphics();
-    void cleanPillars();
-    void setUpPillarTimer();
-    void freezeBirdAndPillarsInPlace();
+    void showGameOverGraphics();//показ графики завершения игры
+    void hideGameOverGraphics();//очищение сцены от графики завершения игры
+    void cleanPillars();//очищение сцены от столбов
+    void setUpPillarTimer();//добавление новой пары столбов через заданный промежуток времени
+    void freezeBirdAndPillarsInPlace();//замирание "Птицы" и столбов на месте
     QTimer * pillarTimer;
     Bird * bird;
-    bool gameOn;
+    bool gameOn;//==true, если игра начата
     int score;
     int bestScore;
     QGraphicsTextItem *scoreTextItem;
