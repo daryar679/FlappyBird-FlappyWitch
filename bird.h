@@ -13,33 +13,33 @@ class Bird : public QObject, public QGraphicsPixmapItem
 public:
     explicit Bird(QPixmap pixmap);
 
-    qreal rotation() const;
+    qreal rotation() const;//геттер для вращения
 
-    qreal y() const;
+    qreal y() const;//геттер для перемещения по у
 
-    void shootUp();
+    void shootUp();//взлет "Птицы"
 
-    void startFlying();
+    void startFlying();//начало движения "Птицы" при старте игры
 
-    void freezeInPlace();
+    void freezeInPlace();//замирание "Птицы" на месте в случае окончания игры
 
 public slots:
-    void setRotation(qreal rotation);
+    void setRotation(qreal rotation);//сеттер для вращения
 
-    void setY(qreal y);
+    void setY(qreal y);//сеттер для перемещения по у
 
-    void rotateTo(const qreal &end, const int& duration, const QEasingCurve& curve);
+    void rotateTo(const qreal &end, const int& duration, const QEasingCurve& curve);//вращение "Птицы"
 
-    void fallToGroudIfNecessary();
+    void fallToGroudIfNecessary();//падение "Птицы" после взлета
 
 signals:
 
 private:
     qreal m_rotation;
     qreal m_y;
-    QPropertyAnimation * yAnimation;
-    QPropertyAnimation * rotationAnimation;
-    qreal groundPosition;
+    QPropertyAnimation * yAnimation;//свойство перемещения "Птицы" по у
+    QPropertyAnimation * rotationAnimation;//свойство вращения "Птицы"
+    qreal groundPosition;//позиция земли
 };
 
 #endif // BIRD_H
